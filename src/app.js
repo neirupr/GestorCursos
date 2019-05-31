@@ -36,8 +36,10 @@ app.use(bodyParser.urlencoded({extended:false}))
 		name: req.body.name,
 		id: parseInt(req.body.id),
 		description: req.body.description,
-		price: parseInt(req.body.price),
-		status: 'disponible'
+		price: parseFloat(req.body.price),
+		modality: req.body.modailty,
+		intensity: parseFloat(req.body.intensity),
+		status: 'disponible',
 	}
 
 	let response = courses.create(course)
