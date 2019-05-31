@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Gestor de Cursos</title>
+	
+	{{>links}}
+</head>
+<body class="d-flex flex-column" style="height: 100vh">
+	<header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar" style="box-shadow: 0 0 10px rgba(0,0,0,.5)">
+		<span class="navbar-brand">Team Logo</span>
+		<nav class="nav">
+			<nav class="nav nav-pills nav-fill">
+				<a class="nav-item nav-link {{isActive 'view' page}}" href="/view">Ver Cursos</a>
+				<a class="nav-item nav-link {{isActive 'create' page}}" href="/create">Crear Curso</a>
+				<a class="nav-item nav-link {{isActive 'subscribe' page}}" href="/subscribe">Inscribir</a>
+				<a class="nav-item nav-link {{isActive 'students' page}}" href="/students">Inscritos</a>
+			</nav>
+		</nav>
+	</header>
+	<section class="container" style="padding-top: 25px">
+		<div class="component__title">{{pageTitle}}</div>
