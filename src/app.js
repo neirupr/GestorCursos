@@ -20,9 +20,10 @@ app.use(bodyParser.urlencoded({extended:false}))
 	res.render('index')
 })
 .get('/view', (req, res)=>{
-	res.render('index',{
+	res.render('view',{
 		page: 'view',
-		pageTitle: 'Listar Cursos'
+		pageTitle: 'Lista de Cursos',
+		courses: courses.listCourses()
 	})
 })
 .get('/create', (req, res)=>{
@@ -37,7 +38,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 		id: parseInt(req.body.id),
 		description: req.body.description,
 		price: parseFloat(req.body.price),
-		modality: req.body.modailty,
+		modality: req.body.modality,
 		intensity: parseFloat(req.body.intensity),
 		status: 'disponible',
 	}

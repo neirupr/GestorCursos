@@ -22,7 +22,7 @@ const save = () =>{
 
 
 const create = (ecourse) =>{
-	read();
+	read()
 
 	let exists = coursesList.find(course => course.id === ecourse.id)
 
@@ -36,4 +36,9 @@ const create = (ecourse) =>{
 	}
 }
 
-module.exports = {create}
+const listCourses = () =>{
+	read()
+	return coursesList
+}
+
+module.exports = {create, listCourses}

@@ -1,0 +1,50 @@
+{{>header}}
+
+<table class="table table-bordered">
+	<thead class="thead-dark">
+		<tr>
+			<th scope="col">Nombre</th>
+			<th scope="col">Descripción</th>
+			<th scope="col">Valor</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each courses}}
+			{{#if available}}
+				<tr class="course__list__item" data-toggle="collapse" data-target="#collapse-{{id}}" aria-expanded="true" aria-controls="collapse-{{id}}">
+					<td>{{name}}</td>
+					<td>{{description}}</td>
+					<td>{{price}}</td>
+				</tr>
+			{{/if}}
+		{{/each}}
+	</tbody>
+</table>
+
+
+{{#each courses}}
+	{{#if available}}
+		<div id="collapse-{{id}}" class="collapse multi-collapse" aria-labelledby="headingOne">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th scope="col">Curso</th>
+						<th scope="col">Descripción</th>
+						<th scope="col">Modalidad</th>
+						<th scope="col">Intensidad horaria</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{name}}</th>
+						<td>{{description}}</td>
+						<td>{{modality}}</td>
+						<td>{{intensity}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	{{/if}}
+{{/each}}
+
+{{>footer}}

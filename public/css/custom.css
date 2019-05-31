@@ -6,3 +6,8 @@
 	text-align: center;
 	text-transform: uppercase;
 }
+
+.course__list__item:hover{
+	background-color: #f8f9fa;
+	cursor: pointer;
+}
