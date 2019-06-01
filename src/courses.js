@@ -21,6 +21,11 @@ const save = () =>{
 }
 
 
+const getCourses = () =>{
+	read()
+	return coursesList
+}
+
 const create = (ecourse) =>{
 	read()
 
@@ -35,9 +40,13 @@ const create = (ecourse) =>{
 	}
 }
 
-const getCourses = () =>{
-	read()
-	return coursesList
+const close = (id) =>{
+	let course = coursesList.find(c => c.id === id)
+	
+	coursesList[coursesList.indexOf(course)].available = false
+	save()
+
+	return {message: 'Se desactivó el curso ' + course.name + ' exitosamente', success: 'success'}
 }
 
-module.exports = {create, getCourses}
+module.exports = {create, close, getCourses}

@@ -80,7 +80,21 @@ app.use(bodyParser.urlencoded({extended:false}))
 .get('/students', (req, res)=>{
 	res.render('students',{
 		page: 'students',
-		pageTitle: 'Estudiantes Inscritos'
+		pageTitle: 'Estudiantes Inscritos',
+		courses: courses.getCourses(),
+		students: students.getStudents()
+	})
+})
+.post('/students', (req, res)=>{
+	let id = parseInt(req.body.id),
+		response = courses.close(id)
+	
+	res.render('students', {
+		page: 'students',
+		pageTitle: 'Estudiantes Inscritos',
+		courses: courses.getCourses(),
+		students: students.getStudents(),
+		response: response
 	})
 })
 
