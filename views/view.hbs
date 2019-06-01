@@ -1,48 +1,26 @@
 {{>header}}
 
-<table class="table table-bordered">
-	<thead class="thead-dark">
-		<tr>
-			<th scope="col">Nombre</th>
-			<th scope="col">Descripción</th>
-			<th scope="col">Valor</th>
-		</tr>
-	</thead>
-	<tbody>
-		{{#each courses}}
-			{{#if available}}
-				<tr class="course__list__item" data-toggle="collapse" data-target="#collapse-{{id}}" aria-expanded="true" aria-controls="collapse-{{id}}">
-					<td>{{name}}</td>
-					<td>{{description}}</td>
-					<td>{{price}}</td>
-				</tr>
-			{{/if}}
-		{{/each}}
-	</tbody>
-</table>
-
-
+<div class="row mx-0 table-bordered courses__list__header">
+	<div class="col-4 p-3 courses__list__header__cell">Nombre</div>
+	<div class="col-6 p-3 courses__list__header__cell">Descripción</div>
+	<div class="col-2 p-3 courses__list__header__cell">Valor</div>
+</div>
 {{#each courses}}
 	{{#if available}}
-		<div id="collapse-{{id}}" class="collapse multi-collapse" aria-labelledby="headingOne">
-			<table class="table table-bordered">
-				<thead>
-					<tr>
-						<th scope="col">Curso</th>
-						<th scope="col">Descripción</th>
-						<th scope="col">Modalidad</th>
-						<th scope="col">Intensidad horaria</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>{{name}}</th>
-						<td>{{description}}</td>
-						<td>{{modality}}</td>
-						<td>{{intensity}}</td>
-					</tr>
-				</tbody>
-			</table>
+		<div class="row mx-0 course__list__item" data-toggle="collapse" data-target="#collapse-{{id}}" aria-expanded="true" aria-controls="collapse-{{id}}">
+			<div class="col-4 p-3">{{name}}</div>
+			<div class="col-6 p-3">{{description}}</div>
+			<div class="col-2 p-3">{{price}}</div>
+			<div class="col-12 px-0">
+				<div id="collapse-{{id}}" class="collapse multi-collapse" aria-labelledby="collapse-{{id}}">
+					<div class="row mx-0">
+						<div class="col-3 py-2 course__list__item__extra">Modalidad:</div>
+						<div class="col-3 py-2 course__list__item__extra__data">{{modality}}</div>
+						<div class="col-3 py-2 course__list__item__extra">Intensidad:</div>
+						<div class="col-3 py-2 course__list__item__extra__data">{{intensity}}</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	{{/if}}
 {{/each}}
