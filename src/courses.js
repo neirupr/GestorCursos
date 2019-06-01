@@ -5,8 +5,8 @@ let coursesList = []
 
 const read = () =>{
 	try{
-		coursesList = require('../courses.json')
-		//coursesList => JSON.parse(fs.readFileSync('courses.json'))
+		coursesList = require('../data/courses.json')
+		//coursesList => JSON.parse(fs.readFileSync('./data/courses.json'))
 	} catch(error){
 		console.log("El archivo courses.json necesita crearse")
 	}
@@ -14,7 +14,7 @@ const read = () =>{
 
 const save = () =>{
 	let data = JSON.stringify(coursesList)
-	fs.writeFile('courses.json', data, err=>{
+	fs.writeFile('./data/courses.json', data, err=>{
 		if(err) trow(err)
 		console.log("El archivo courses.json se ha creado con éxito")
 	})
@@ -31,14 +31,13 @@ const create = (ecourse) =>{
 		save()
 		return {message: 'Se ha creado el curso!', success: 'success'}
 	} else {
-		console.log('Ya existe el curso')
 		return {message: 'El curso ya existe', success: 'fail'}
 	}
 }
 
-const listCourses = () =>{
+const getCourses = () =>{
 	read()
 	return coursesList
 }
 
-module.exports = {create, listCourses}
+module.exports = {create, getCourses}
