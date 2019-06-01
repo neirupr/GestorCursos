@@ -7,7 +7,8 @@ const express = require('express'),
 	publicDir = path.join(__dirname,'../public'),
 	partialsDir = path.join(__dirname,'../partials'),
 	bodyParser = require('body-parser'),
-	courses = require('./courses')
+	courses = require('./courses'),
+	students = require('./students')
 
 require('./helpers')
 hbs.registerPartials(partialsDir)
@@ -23,7 +24,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 	res.render('view',{
 		page: 'view',
 		pageTitle: 'Lista de Cursos',
-		courses: courses.listCourses()
+		courses: courses.getCourses()
 	})
 })
 .get('/create', (req, res)=>{
@@ -54,7 +55,26 @@ app.use(bodyParser.urlencoded({extended:false}))
 .get('/subscribe', (req, res)=>{
 	res.render('subscribe',{
 		page: 'subscribe',
-		pageTitle: 'Inscribir Alumnos'
+		pageTitle: 'Inscribir Alumnos',
+		courses: courses.getCourses()
+	})
+})
+.post('/subscribe', (req, res)=>{
+	let student = {
+		name: req.body.name,
+		id: parseInt(req.body.id),
+		email: req.body.email,
+		phone: parseInt(req.body.phone),
+		course: parseInt(req.body.course)
+	}
+
+	let response = students.create(student)
+
+	res.render('subscribe',{
+		page: 'subscribe',
+		pageTitle: 'Inscribirse en un curso',
+		courses: courses.getCourses(),
+		response: response
 	})
 })
 .get('/students', (req, res)=>{
