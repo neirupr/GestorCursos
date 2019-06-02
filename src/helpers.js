@@ -39,8 +39,11 @@ hbs.registerHelper('listStudents', (id, studentList)=>{
 							+ student.name + 
 							`</div>
 							<div class="col-1" style="text-align: right">
-								<form class="d-inline" action="/students" method="delete">
-									<button class="btn btn-danger">
+								<form class="d-inline" action="/students" method="post">
+									<input name="method" type="text" value="delete" class="d-none"/>
+									<input name="id" type="number" value=` + student.id + ` class="d-none"/>
+									<input name="course" type="number" value=` + student.course + ` class="d-none"/>
+									<button class="btn btn-danger" type="submit">
 										<i class="material-icons">delete</i>
 									</button>
 								</form>

@@ -35,9 +35,21 @@ const create = (eStudent) =>{
 	}
 }
 
+const cancel = (student, course)=>{
+	read()
+
+	let subscription = studentsList.find(s => (s.id === student && s.course === course)),
+		index = studentsList.indexOf(subscription)
+
+	studentsList.splice(index, 1)
+	save()
+
+	return {message: 'El estudiante se ha retirado correctamente', success: 'success'}
+}
+
 const getStudents = () =>{
 	read()
 	return studentsList
 }
 
-module.exports = {create, getStudents}
+module.exports = {create, getStudents, cancel}

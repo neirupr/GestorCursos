@@ -86,16 +86,33 @@ app.use(bodyParser.urlencoded({extended:false}))
 	})
 })
 .post('/students', (req, res)=>{
-	let id = parseInt(req.body.id),
+	let method = req.body.method,
+		id = parseInt(req.body.id),
+		response
+
+	if(method !== 'delete'){
 		response = courses.close(id)
 	
-	res.render('students', {
-		page: 'students',
-		pageTitle: 'Estudiantes Inscritos',
-		courses: courses.getCourses(),
-		students: students.getStudents(),
-		response: response
-	})
+		res.render('students', {
+			page: 'students',
+			pageTitle: 'Estudiantes Inscritos',
+			courses: courses.getCourses(),
+			students: students.getStudents(),
+			response: response
+		})
+	} else {
+		let course = parseInt(req.body.course)
+		
+		response = students.cancel(id, course)
+
+		res.render('students', {
+			page: 'students',
+			pageTitle: 'Estudiantes Inscritos',
+			courses: courses.getCourses(),
+			students: students.getStudents(),
+			response: response
+		})
+	}
 })
 
 app.listen(3000, ()=>{
