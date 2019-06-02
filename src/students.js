@@ -29,9 +29,9 @@ const create = (eStudent) =>{
 	if (!existsInCourse){
 		studentsList.push(eStudent)
 		save()
-		return {message: 'El estudiante se ha registrado correctamente!', success: 'success'}
+		return {message: 'El estudiante ' + eStudent.name + ' se ha registrado correctamente!', success: 'success'}
 	} else {
-		return {message: 'El estudiante ' + eStudent.name + " ya está registrado en el curso " + eStudent.course, success: 'fail'}
+		return {message: 'El estudiante ' + eStudent.name + ' ya está registrado en el curso ' + eStudent.course, success: 'fail'}
 	}
 }
 
