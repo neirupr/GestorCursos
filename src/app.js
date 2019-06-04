@@ -18,19 +18,26 @@ app.use(bodyParser.urlencoded({extended:false}))
 	.set('view engine', 'hbs')
 
 .get('/', (req, res) =>{
-	res.render('index')
+	res.render('index', {
+		pageTitle: 'Gestor de Cursos',
+		developers: [
+			'Andersson Villa',
+			'Gabriel Rodríguez',
+			'Neiro Torres'
+		]
+	})
 })
 .get('/view', (req, res)=>{
-	res.render('view',{
+	res.render('listCourses',{
 		page: 'view',
 		pageTitle: 'Lista de Cursos',
 		courses: courses.getCourses()
 	})
 })
 .get('/create', (req, res)=>{
-	res.render('create',{
+	res.render('createCourse',{
 		page: 'create',
-		pageTitle: 'Crear Curso'
+		pageTitle: 'Abrir Curso'
 	})
 })
 .post('/create', (req, res)=>{
@@ -46,9 +53,9 @@ app.use(bodyParser.urlencoded({extended:false}))
 
 	let response = courses.create(course)
 
-	res.render('create', {
+	res.render('createCourse', {
 		page: 'create',
-		pageTitle: 'Crear Curso',
+		pageTitle: 'Abrir Curso',
 		response: response
 	})
 })
@@ -78,7 +85,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 	})
 })
 .get('/students', (req, res)=>{
-	res.render('students',{
+	res.render('listStudents',{
 		page: 'students',
 		pageTitle: 'Estudiantes Inscritos',
 		courses: courses.getCourses(),
@@ -105,7 +112,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 		
 		response = students.cancel(id, course)
 
-		res.render('students', {
+		res.render('listStudents', {
 			page: 'students',
 			pageTitle: 'Estudiantes Inscritos',
 			courses: courses.getCourses(),
@@ -113,6 +120,16 @@ app.use(bodyParser.urlencoded({extended:false}))
 			response: response
 		})
 	}
+})
+.get('*', (req, res)=>{
+	res.render('index', {
+		pageTitle: 'Gestor de Cursos',
+		developers: [
+			'Andersson Villa',
+			'Gabriel Rodríguez',
+			'Neiro Torres'
+		]
+	})
 })
 
 app.listen(3000, ()=>{

@@ -35,10 +35,10 @@ hbs.registerHelper('listStudents', (id, studentList)=>{
 		arrayFiltered.forEach(student =>{
 			response = response + 
 						`<div class="row mx-0 my-1">
-							<div class="col-11 d-flex align-items-center" style="border-top: 1px solid #dee2e6; margin-bottom: 4px">` 
+							<div class="col-11 d-flex align-items-center border-top mb-1 pt-1">` 
 							+ student.name + 
 							`</div>
-							<div class="col-1" style="text-align: right">
+							<div class="col-1 text-right">
 								<form class="d-inline" action="/students" method="post">
 									<input name="method" type="text" value="delete" class="d-none"/>
 									<input name="id" type="number" value=` + student.id + ` class="d-none"/>
@@ -52,7 +52,7 @@ hbs.registerHelper('listStudents', (id, studentList)=>{
 		})
 	} else {
 		response = `<div class="row mx-0 my-1">
-							<div class="col-11 d-flex align-items-center" style="border-top: 1px solid #dee2e6; margin-bottom: 4px">
+							<div class="col-11 d-flex align-items-center border-top mb-1 pt-1">
 								Ningún estudiante se encuentra inscrito en este curso
 							</div>
 							<div class="col-1">
