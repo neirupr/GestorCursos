@@ -8,5 +8,8 @@
 ## Develop using
 - $ nodemon src/app -e js,hbs
 
+## Raise server as user
+- $ node src/app
+
 ## Other indications
 - Go to localhost:3000
