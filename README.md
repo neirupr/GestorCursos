@@ -6,10 +6,11 @@
 - Install dependencies: $ npm install
 
 ## Develop using
-- $ nodemon src/app -e js,hbs
+- $ nodemon src/app -e js,json,hbs
 
 ## Raise server as user
 - $ node src/app
 
 ## Other indications
 - Go to localhost:3000
+- Admin user credentials: admin/nimda

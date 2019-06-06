@@ -8,7 +8,13 @@ const express = require('express'),
 	partialsDir = path.join(__dirname,'../partials'),
 	bodyParser = require('body-parser'),
 	courses = require('./courses'),
-	students = require('./students')
+	students = require('./students'),
+	users = require('./users'),
+	displayLogin = (res, params) =>{
+		res.render('login', params)
+	}
+
+let user = undefined
 
 require('./helpers')
 hbs.registerPartials(partialsDir)
@@ -18,27 +24,39 @@ app.use(bodyParser.urlencoded({extended:false}))
 	.set('view engine', 'hbs')
 
 .get('/', (req, res) =>{
-	res.render('index', {
-		pageTitle: 'Gestor de Cursos',
-		developers: [
-			'Andersson Villa',
-			'Gabriel Rodríguez',
-			'Neiro Torres'
-		]
-	})
+	if(user !== undefined){
+		res.render('index', {
+			pageTitle: 'Gestor de Cursos',
+			developers: [
+				'Andersson Villa',
+				'Gabriel Rodríguez',
+				'Neiro Torres'
+			]
+		})
+	} else {
+		displayLogin(res, {pageTitle: 'Iniciar sesión'})
+	}
 })
 .get('/view', (req, res)=>{
-	res.render('listCourses',{
-		page: 'view',
-		pageTitle: 'Lista de Cursos',
-		courses: courses.getCourses()
-	})
+	if(user !== undefined){
+		res.render('listCourses',{
+			page: 'view',
+			pageTitle: 'Lista de Cursos',
+			courses: courses.getCourses()
+		})
+	} else {
+		displayLogin(res, {pageTitle: 'Iniciar sesión'})
+	}
 })
 .get('/create', (req, res)=>{
-	res.render('createCourse',{
-		page: 'create',
-		pageTitle: 'Abrir Curso'
-	})
+	if(user !== undefined){
+		res.render('createCourse',{
+			page: 'create',
+			pageTitle: 'Abrir Curso'
+		})
+	} else {
+		displayLogin(res, {pageTitle: 'Iniciar sesión'})
+	}
 })
 .post('/create', (req, res)=>{
 	let course = {
@@ -60,11 +78,15 @@ app.use(bodyParser.urlencoded({extended:false}))
 	})
 })
 .get('/subscribe', (req, res)=>{
-	res.render('subscribe',{
-		page: 'subscribe',
-		pageTitle: 'Inscribir Alumnos',
-		courses: courses.getCourses()
-	})
+	if(user !== undefined){
+		res.render('subscribe',{
+			page: 'subscribe',
+			pageTitle: 'Inscribir Alumnos',
+			courses: courses.getCourses()
+		})
+	} else {
+		displayLogin(res, {pageTitle: 'Iniciar sesión'})
+	}
 })
 .post('/subscribe', (req, res)=>{
 	let student = {
@@ -85,12 +107,16 @@ app.use(bodyParser.urlencoded({extended:false}))
 	})
 })
 .get('/students', (req, res)=>{
-	res.render('listStudents',{
-		page: 'students',
-		pageTitle: 'Estudiantes Inscritos',
-		courses: courses.getCourses(),
-		students: students.getStudents()
-	})
+	if(user !== undefined){
+		res.render('listStudents',{
+			page: 'students',
+			pageTitle: 'Estudiantes Inscritos',
+			courses: courses.getCourses(),
+			students: students.getStudents()
+		})
+	} else {
+		displayLogin(res, {pageTitle: 'Iniciar sesión'})
+	}
 })
 .post('/students', (req, res)=>{
 	let method = req.body.method,
@@ -117,6 +143,21 @@ app.use(bodyParser.urlencoded({extended:false}))
 			pageTitle: 'Estudiantes Inscritos',
 			courses: courses.getCourses(),
 			students: students.getStudents(),
+			response: response
+		})
+	}
+})
+.post('/login', (req, res)=>{
+	let _username = req.body.username,
+		_password = req.body.password,
+		response = users.getUser(_username, _password)
+
+	if(response.success === 'success'){
+		user = response.user
+		res.redirect('/')
+	} else {
+		displayLogin(res, {
+			pageTitle: 'Iniciar sesión',
 			response: response
 		})
 	}
