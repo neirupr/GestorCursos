@@ -21,17 +21,17 @@ const save = () =>{
 }
 
 
-const create = (eStudent) =>{
+const subscribe = (register) =>{
 	read()
 
-	let existsInCourse = studentsList.find(student => student.id === eStudent.id && student.course === eStudent.course)
+	let existsInCourse = studentsList.find(row => row.student === register.student && row.course === register.course)
 
 	if (!existsInCourse){
-		studentsList.push(eStudent)
+		studentsList.push(register)
 		save()
-		return {message: 'El estudiante ' + eStudent.name + ' se ha registrado correctamente!', success: 'success'}
+		return {message: 'El estudiante se ha registrado correctamente!', success: 'success'}
 	} else {
-		return {message: 'El estudiante ' + eStudent.name + ' ya está registrado en el curso ' + eStudent.course, success: 'fail'}
+		return {message: 'El estudiante ya está registrado en el curso ', success: 'fail'}
 	}
 }
 
@@ -52,4 +52,4 @@ const getStudents = () =>{
 	return studentsList
 }
 
-module.exports = {create, getStudents, cancel}
+module.exports = {subscribe, getStudents, cancel}
