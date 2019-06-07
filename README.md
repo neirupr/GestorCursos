@@ -13,4 +13,4 @@
 
 ## Other indications
 - Go to localhost:3000
-- Admin user credentials: admin/nimda
+- Admin user credentials: admin@keyrus.com/nimda

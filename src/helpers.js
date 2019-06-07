@@ -6,6 +6,10 @@ hbs.registerHelper('isActive', (val1, val2)=>{
 	return val1 == val2 ? ' active' : ''
 })
 
+hbs.registerHelper('ifEquals', function(arg1, arg2, options) {
+    return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
+
 hbs.registerHelper('displayMessage', (status, message)=>{
 	let response
 	if(status == 'success'){
