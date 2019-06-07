@@ -126,15 +126,12 @@ app.use(bodyParser.urlencoded({extended:false}))
 	})
 })
 .post('/subscribe', (req, res)=>{
-	let student = {
-		name: req.body.name,
-		id: parseInt(req.body.id),
-		email: req.body.email,
-		phone: parseInt(req.body.phone),
-		course: parseInt(req.body.course)
+	let register = {
+		course: parseInt(req.body.course),
+		student: parseInt(req.body.id)
 	}
 
-	let response = students.create(student)
+	let response = students.subscribe(register)
 
 	res.render('subscribe',{
 		page: 'subscribe',
