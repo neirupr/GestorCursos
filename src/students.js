@@ -38,9 +38,11 @@ const subscribe = (register) =>{
 const cancel = (student, course)=>{
 	read()
 
-	let subscription = studentsList.find(s => (s.id === student && s.course === course)),
+	console.log(studentsList)
+	let subscription = studentsList.find(s => (s.student === student && s.course === course)),
 		index = studentsList.indexOf(subscription)
 
+	console.log(subscription)
 	studentsList.splice(index, 1)
 	save()
 

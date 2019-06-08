@@ -84,7 +84,8 @@ app.use(bodyParser.urlencoded({extended:false}))
 			page: 'students',
 			pageTitle: 'Estudiantes Inscritos',
 			courses: courses.getCourses(),
-			students: students.getStudents(),
+			students: users.getUsers(),
+			subscriptions: students.getStudents(),
 			user: currentUser,
 			userAccess: privileges.getPrivileges(currentUser.type)
 		})
@@ -150,25 +151,27 @@ app.use(bodyParser.urlencoded({extended:false}))
 	if(method !== 'delete'){
 		response = courses.close(id)
 	
-		res.render('students', {
+		res.render('listStudents', {
 			page: 'students',
 			pageTitle: 'Estudiantes Inscritos',
 			courses: courses.getCourses(),
-			students: students.getStudents(),
+			students: users.getUsers(),
+			subscriptions: students.getStudents(),
 			response: response,
 			user: currentUser,
 			userAccess: privileges.getPrivileges(currentUser.type)
 		})
 	} else {
 		let course = parseInt(req.body.course)
-		
+
 		response = students.cancel(id, course)
 
 		res.render('listStudents', {
 			page: 'students',
 			pageTitle: 'Estudiantes Inscritos',
 			courses: courses.getCourses(),
-			students: students.getStudents(),
+			students: users.getUsers(),
+			subscriptions: students.getStudents(),
 			response: response,
 			user: currentUser,
 			userAccess: privileges.getPrivileges(currentUser.type)
@@ -178,7 +181,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 .post('/login', (req, res)=>{
 	let _username = req.body.username,
 		_password = req.body.password,
-		response = users.getUser(_username, _password)
+		response = users.findUser(_username, _password)
 
 	if(response.success === 'success'){
 		currentUser = response.user

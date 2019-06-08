@@ -31,9 +31,18 @@ hbs.registerHelper('displayMessage', (status, message)=>{
 	return response
 })
 
-hbs.registerHelper('listStudents', (id, studentList)=>{
+hbs.registerHelper('listStudents', (id, studentList, subscriptionList)=>{
 	let response = '',
-		arrayFiltered = studentList.filter(student => student.course === id)
+		subscriptions = subscriptionList.filter(subscription => subscription.course === id),
+		arrayFiltered = []
+		
+		subscriptions.forEach(sub => {
+			let student = studentList.find(stu => stu.id === sub.student)
+
+			if(student !== undefined)
+				student.course = sub.course
+				arrayFiltered.push(student)
+		})
 
 	if(arrayFiltered.length > 0){
 		arrayFiltered.forEach(student =>{
