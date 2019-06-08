@@ -10,7 +10,7 @@ save = (userList) =>{
 	})
 },
 
-getUser = (uName, uPW) =>{
+findUser = (uName, uPW) =>{
 	let users, userFound
 
 	try{
@@ -54,8 +54,20 @@ createUser = eUser =>{
 		save(users)
 		return {message: 'El usuario ' + eUser.name + ' se ha registrado correctamente!', success: 'success'}
 	}
+},
+
+getUsers = ()=>{
+	let users
+	try{
+		users = require('../data/users.json')
+		//users => JSON.parse(fs.readFileSync('./data/users.json'))
+	} catch(error){
+		console.log('El archivo users.json necesita crearse')
+	}
+
+	return users
 }
 
 
 
-module.exports = { getUser, createUser }
+module.exports = { findUser, createUser, getUsers }
