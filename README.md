@@ -6,7 +6,7 @@
 - Install dependencies: $ npm install
 
 ## Develop using
-- $ nodemon src/app -e js,json,hbs
+- $ nodemon src/app -e js,hbs
 
 ## Raise server as user
 - $ node src/app
