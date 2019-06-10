@@ -30,6 +30,11 @@ const getPrivileges = (type) =>{
 				'name': 'subscribe',
 				'path': '/subscribe',
 				'caption': 'Inscribirse'
+			},
+			{
+				'name': 'cursos',
+				'path': '/courseList',
+				'caption': 'Mis Cursos'
 			})
 	}
 

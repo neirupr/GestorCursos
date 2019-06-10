@@ -19,7 +19,11 @@ const save = () =>{
 		console.log("El archivo students.json se ha creado con éxito")
 	})
 }
-
+const getSubcribedCourses=(id)=>{
+	read()
+	let courses=  studentsList.filter(row => row.student === id)
+	return courses
+}
 
 const subscribe = (register) =>{
 	read()
@@ -54,4 +58,4 @@ const getStudents = () =>{
 	return studentsList
 }
 
-module.exports = {subscribe, getStudents, cancel}
+module.exports = {subscribe, getStudents, cancel,getSubcribedCourses}

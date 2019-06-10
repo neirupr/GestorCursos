@@ -78,3 +78,53 @@ hbs.registerHelper('listStudents', (id, studentList, subscriptionList)=>{
 
 	return response
 })
+
+hbs.registerHelper('myCourses', (id, courseList, subscriptionList)=>{
+	let response = '',
+		arrayFiltered = []
+		
+		subscriptionList.forEach(sub => {
+			let findedCourse = courseList.find(course => course.id === sub.course)
+
+			if(findedCourse !== undefined)
+				arrayFiltered.push(findedCourse)
+		})
+console.log(arrayFiltered)
+	if(arrayFiltered.length > 0){
+		arrayFiltered.forEach(course =>{
+			response = response + 
+						`<div class="row mx-0 my-1">
+							<div class="col-4 p-3 text-center">` 
+							+ course.name + 
+							`</div><div class="col-4 p-3 text-center">`
+							+course.description+
+							`</div><div class="col-2 p-3 text-center">`
+							+course.price+
+							`</div>
+							<div class="col-1 text-center">
+								<form class="d-inline" action="/courseList" method="post">
+									<input name="method" type="text" value="delete" class="d-none"/>
+									<input name="id" type="number" value=` + id + ` class="d-none"/>
+									<input name="course" type="number" value=` + course.id + ` class="d-none"/>
+									<button class="btn btn-danger" type="submit">
+										<i class="material-icons">delete</i>
+									</button>
+								</form>
+							</div>
+						</div>`			
+		})
+	} else {
+		response = `<div class="row mx-0 my-1">
+							<div class="col-11 d-flex align-items-center border-top mb-1 pt-1">
+								Aun no te has inscrito a algun curso
+							</div>
+							<div class="col-1">
+								<button class="btn btn-danger invisible">
+									<i class="material-icons">delete</i>
+								</button>
+							</div>
+						</div>`				
+	}
+
+	return response
+})

@@ -20,7 +20,6 @@ const save = () =>{
 	})
 }
 
-
 const getCourses = () =>{
 	read()
 	return coursesList
@@ -49,4 +48,4 @@ const close = (id) =>{
 	return {message: 'Se desactivó el curso ' + course.name + ' exitosamente', success: 'success'}
 }
 
-module.exports = {create, close, getCourses}
+module.exports = {create, close,getCourses}
