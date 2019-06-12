@@ -94,16 +94,13 @@
 		}
 	})
 	.get('/newuser', (req, res)=>{
-		if(currentUser !== undefined){
 			res.render('newUser', {
 				page: 'newuser',
 				pageTitle: 'Registrar nuevo usuario',
 				user: currentUser,
-				userAccess: privileges.getPrivileges(currentUser.type)
+			
 			})
-		} else {
-			displayLogin(res, {pageTitle: 'Iniciar sesión'})
-		}	
+			
 	})
 	.get('/courseList', (req, res)=>{
 		if(currentUser !== undefined){
@@ -243,8 +240,11 @@
 			pageTitle: 'Registrar nuevo usuario',
 			response: response,
 			user: currentUser,
-			userAccess: privileges.getPrivileges(currentUser.type)
+			
 		})	
+	}).get('/logout',(req, res)=>{
+		currentUser = undefined;
+		displayLogin(res, {pageTitle: 'Iniciar sesión'})
 	})
 
 

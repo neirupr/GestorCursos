@@ -18,13 +18,14 @@ const getPrivileges = (type) =>{
 			{
 				'name': 'students',
 				'path': '/students',
-				'caption': 'Listar Inscritos'
+				'caption': 'Listar Inscritos por curso'
 			},
 			{
-				'name': 'newuser',
-				'path': '/newuser',
-				'caption': 'Nuevo Usuario'
-			})
+				'name': 'registered',
+				'path': '/allusers',
+				'caption': 'Administrar usuarios'
+			}
+			)
 	} else {
 		access.push({
 				'name': 'subscribe',
