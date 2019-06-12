@@ -155,7 +155,6 @@
 			user: currentUser,
 			userAccess: privileges.getPrivileges(currentUser.type)
 		})
-		console.log(currentUser);
 	})
 	.post('/subscribe', (req, res)=>{
 		let register = {

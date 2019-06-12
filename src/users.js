@@ -68,9 +68,10 @@ findByid = (stId) =>{
 },
 
 updateUser = (user) =>{
-
 	let users = fetchUsers();
 	let found = users.findIndex(u => u.id == user.id);
+
+
     if(!found){
         console.log('Estudiante no existe');
     }else{
