@@ -246,13 +246,47 @@
 		currentUser = undefined;
 		displayLogin(res, {pageTitle: 'Iniciar sesión'})
 	})
+	.get('/allusers',(req, res)=>{
+		if(currentUser !== undefined){
+		
+			res.render('allusers', {
+				page: 'allUsers',
+				pageTitle: 'Todos los usuarios Inscritos',
+				allUsers: users.getUsers().filter(u => u.type!=="admin"),
+				userAccess: privileges.getPrivileges(currentUser.type),
+				user: currentUser
+			});
+		} else {
+			displayLogin(res, {pageTitle: 'Iniciar sesión'})
+		}
+	})
 
+	.get('/editUser',(req, res)=>{
+		if(currentUser !== undefined){
+			res.render('edituser', {
+				page: 'editUser',
+				pageTitle: 'Modificar usuario',
+				editUserData: users.findByid(req.query.id),
+				userAccess: privileges.getPrivileges(currentUser.type),
+				user: currentUser
+			});
+		} else {
+			displayLogin(res, {pageTitle: 'Iniciar sesión'})
+		}
+	})
+	.post('/updateUser', (req, res)=>{
+		let UserToUpdate = {
+			name: req.body.name,
+			id: parseInt(req.body.id),
+			email: req.body.email,
+			password: req.body.password,
+			phone: parseInt(req.body.phone),
+			type: req.body.rol
+		};
+		users.updateUser(UserToUpdate);
 
-
-
-
-
-
+		res.redirect('/allusers')
+	})
 
 	.get('*', (req, res)=>{
 		if(currentUser !== undefined){
@@ -268,6 +302,8 @@
 			displayLogin(res, {pageTitle: 'Iniciar sesión'})
 		}
 	})
+
+
 
 	app.listen(3000, ()=>{
 		console.log('Escuchando en el puerto 3000')

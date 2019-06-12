@@ -1,0 +1,27 @@
+{{>header}}
+{{>messages}}
+
+
+<div class="row mx-0 table-bordered courses__list__header">
+	<div class="col-3 p-3 courses__list__header__cell">Nombre</div>
+	<div class="col-2 p-3 courses__list__header__cell">Identificación</div>
+	<div class="col-4 p-3 courses__list__header__cell">Email</div>
+	<div class="col-2 p-3 courses__list__header__cell">Rol</div>
+    <div class="col-1 p-3 courses__list__header__cell">Acciones</div>
+</div>
+    {{#each allUsers}}
+
+        <div class="row mx-0 table-bordered courses__list__item">
+            <div class="col-3 p-3 courses__list__header__cell">{{name}}</div>
+            <div class="col-2 p-3 courses__list__header__cell">{{id}}</div>
+            <div class="col-4 p-3 courses__list__header__cell">{{email}}</div>
+            <div class="col-2 p-3 courses__list__header__cell">{{type}}</div>
+            <div class="col-1 p-3 courses__list__header__cell">
+                <a href="/editUser?id={{id}}" class="btn btn-warning">
+		            <i class="material-icons">edit</i>
+				</a>
+            </div>
+
+        </div>
+    {{/each}}
+{{>footer}}
