@@ -52,7 +52,7 @@ createUser = eUser =>{
 	} else {
 		users.push(eUser)
 		save(users)
-		return {message: 'El usuario ' + eUser.name + ' se ha registrado correctamente!', success: 'success'}
+		return {message: 'El usuario ' + eUser.name + ' se ha registrado correctamente! <a href="/login">Puedes ingresar a la página de login</a>', success: 'success'}
 	}
 },
 
