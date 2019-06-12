@@ -8,7 +8,7 @@
 ## Develop using
 - $ nodemon src/app -e js,hbs
 
-## Raise server as user
+## Start server as user
 - $ node src/app
 
 ## Other indications
