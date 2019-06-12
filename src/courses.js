@@ -35,7 +35,7 @@ const create = (ecourse) =>{
 		save()
 		return {message: 'Se ha creado el curso!', success: 'success'}
 	} else {
-		return {message: 'El curso ya existe', success: 'fail'}
+		return {message: 'Ya existe un curso con id ' + ecourse.id, success: 'fail'}
 	}
 }
 
