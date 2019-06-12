@@ -2,6 +2,16 @@
 
 const fs = require('fs'),
 
+fetchUsers = ()=>{
+	let users
+	try{
+		users = require('../data/users.json')
+	} catch(error){
+		console.log("El archivo users.json necesita crearse")
+	}
+	return users;
+},
+
 save = (userList) =>{
 	let data = JSON.stringify(userList)
 	fs.writeFile('./data/users.json', data, err=>{
@@ -13,12 +23,7 @@ save = (userList) =>{
 findUser = (uName, uPW) =>{
 	let users, userFound
 
-	try{
-		users = require('../data/users.json')
-		//users => JSON.parse(fs.readFileSync('./data/users.json'))
-	} catch(error){
-		console.log("El archivo users.json necesita crearse")
-	}
+	users = fetchUsers();
 
 	userFound = users.find(u => u.email === uName && u.password === uPW )
 	
@@ -37,13 +42,7 @@ findUser = (uName, uPW) =>{
 
 createUser = eUser =>{
 	let users, userFound
-
-	try{
-		users = require('../data/users.json')
-		//users => JSON.parse(fs.readFileSync('./data/users.json'))
-	} catch(error){
-		console.log("El archivo users.json necesita crearse")
-	}
+	users = fetchUsers();
 
 	userFound = users.find(u => u.id === eUser.id)
 	
@@ -57,17 +56,27 @@ createUser = eUser =>{
 },
 
 getUsers = ()=>{
-	let users
-	try{
-		users = require('../data/users.json')
-		//users => JSON.parse(fs.readFileSync('./data/users.json'))
-	} catch(error){
-		console.log('El archivo users.json necesita crearse')
-	}
+	return  fetchUsers();
+},
 
-	return users
+
+findByid = (stId) =>{
+	let users, userFound
+	users = fetchUsers();
+	userFound = users.find(u => u.id === parseInt(stId))
+	return userFound
+},
+
+updateUser = (user) =>{
+
+	let users = fetchUsers();
+	let found = users.findIndex(u => u.id == user.id);
+    if(!found){
+        console.log('Estudiante no existe');
+    }else{
+		users[found]= user
+		save(users)
+    }
 }
 
-
-
-module.exports = { findUser, createUser, getUsers }
+module.exports = { findUser, createUser, getUsers,findByid , updateUser}
